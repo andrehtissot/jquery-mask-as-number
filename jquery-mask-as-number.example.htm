@@ -14,44 +14,92 @@
     <br />
     <br />
     <fieldset>
-        <legend>Vanilla Text Field</legend>
-        <label>Example: <input value="Initial text 123456789"/></label>
+        <legend>Text Field</legend>
+        <fieldset>
+            <legend>Vanilla field</legend>
+            <label>Example: <input value="Initial text 123456789"/></label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field dynamically bound</legend>
+            <label>Example: <input class="maskedTextField" value="Initial text 123456789"/></label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field with maxlength 8</legend>
+            <label>Example:
+                <input class="maskedTextField" value="Initial text 123456789"
+                    maxlength="8" />
+            </label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field with max value 512</legend>
+            <label>Example:
+                <input class="maskedTextField" value="Initial text 123456789"
+                    data-mask-as-number-max="512" />
+            </label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field with min value 2</legend>
+            <label>Example:
+                <input class="maskedTextField" value="Initial text 123456789"
+                    data-mask-as-number-min="2" />
+            </label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field with min 2 and max 3 as options</legend>
+            <label>Example:
+                <input id="specialMaskedTextField" value="Initial text 123456789" />
+            </label>
+        </fieldset>
     </fieldset>
     <br />
-    <fieldset>
-        <legend>Masked Text Field dynamically bound</legend>
-        <label>Example: <input class="maskedTextField" value="Initial text 123456789"/></label>
-    </fieldset>
     <br />
     <fieldset>
-        <legend>Masked Text Field with maxlength 8</legend>
-        <label>Example:
-            <input class="maskedTextField" value="Initial text 123456789" 
-                maxlength="8" />
-        </label>
-    </fieldset>
-    <br />
-    <fieldset>
-        <legend>Masked Text Field with max value 512</legend>
-        <label>Example:
-            <input class="maskedTextField" value="Initial text 123456789" 
-                data-mask-as-number-max="512" />
-        </label>
-    </fieldset>
-    <br />
-    <fieldset>
-        <legend>Masked Text Field with min value 2</legend>
-        <label>Example:
-            <input class="maskedTextField" value="Initial text 123456789" 
-                data-mask-as-number-min="2" />
-        </label>
-    </fieldset>
-    <br />
-    <fieldset>
-        <legend>Masked Text Field with min 2 and max 3 as options</legend>
-        <label>Example:
-            <input id="specialMaskedTextField" value="Initial text 123456789" />
-        </label>
+        <legend>Number Field</legend>
+        <fieldset>
+            <legend>Vanilla field</legend>
+            <label>Example: <input type="number" value="Initial text 123456789"/></label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field dynamically bound</legend>
+            <label>Example: <input type="number" class="maskedTextField" value="Initial text 123456789"/></label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field with maxlength 8</legend>
+            <label>Example:
+                <input type="number" class="maskedTextField" value="Initial text 123456789"
+                    maxlength="8" />
+            </label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field with max value 512</legend>
+            <label>Example:
+                <input type="number" class="maskedTextField" value="Initial text 123456789"
+                    data-mask-as-number-max="512" />
+            </label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field with min value 2</legend>
+            <label>Example:
+                <input type="number" class="maskedTextField" value="Initial text 123456789"
+                    data-mask-as-number-min="2" />
+            </label>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Masked field with min 2 and max 3 as options</legend>
+            <label>Example:
+                <input type="number" id="specialMaskedNumberField" value="Initial text 123456789" />
+            </label>
+        </fieldset>
     </fieldset>
     <br />
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -60,7 +108,7 @@
     <script src="jquery-mask-as-number.js"></script>
     <script>
         $('.maskedTextField').maskAsNumber();
-        $('#specialMaskedTextField').maskAsNumber({min: 2, max: 3});
+        $('#specialMaskedTextField,#specialMaskedNumberField').maskAsNumber({min: 2, max: 3});
     </script>
 </body>
 </html>

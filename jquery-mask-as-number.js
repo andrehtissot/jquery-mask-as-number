@@ -30,10 +30,19 @@
       value = value.substr(0, maxlength);
     return (''+value) === originalValue ? false : value;
   }
+  var getFieldValue = function(inputElement){
+    if(inputElement.type === 'number'){
+      inputElement.type = 'text';
+      var value = inputElement.value;
+      inputElement.type = 'number';
+      return value;
+    }
+    return inputElement.value;
+  };
   $.fn.maskAsNumber = function(options){
     var options = options || {};
     $(this).each(function(idx,element){
-      var $elem = $(element), min = null, value = $elem.val(),
+      var $elem = $(element), min = null, value = getFieldValue(element),
         max = (options.max || $elem.data('maskAsNumberMax') || null);
       var maxlength = $elem.attr('maxlength') || null;
       if (max !== null && maxlength === null)
@@ -53,14 +62,14 @@
       var char = event.char || String.fromCharCode(event.charCode);
       if (!(/^\d$/.test(char))) { event.preventDefault(); return; }
     }).on('keyup.maskAsNumber', function(event){
-      var $this = $(this), value = $this.val();
+      var $this = $(this), value = getFieldValue(this);
       if(value === '' || value === '0') { return; }
       var fixedValue = fixValue(value, null,
         ($this.data('maskAsNumberMax') || null), null);
       if (fixedValue !== false)
         $this.val(''+fixedValue);
     }).on('focusout.maskAsNumber', function(event){
-      var $this = $(this), value = $this.val();
+      var $this = $(this), value = getFieldValue(this);
       if(value === '') { return; }
       var fixedValue = fixValue(value,
         ($this.data('maskAsNumberMin') || null),
@@ -80,7 +89,7 @@
       $this.removeAttr('maxlength');
       setTimeout(function($elem, maxlength){
         $elem.attr('maxlength', maxlength);
-        var value = $elem.val();
+        var value = getFieldValue($elem[0]);
         if(value.length > maxlength)
           $elem.val(value.substr(0, maxlength));
       }, 100, $this, maxlength);
