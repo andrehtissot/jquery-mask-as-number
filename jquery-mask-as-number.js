@@ -1,5 +1,5 @@
 /*!
- * MaskAsNumber Jquery Plugin v1.1
+ * MaskAsNumber Jquery Plugin v1.3
  * https://github.com/andrehtissot/jquery-mask-as-number
  *
  * Requires jQuery Library
@@ -8,7 +8,7 @@
  * Copyright André Augusto Tissot
  * Released under the MIT license
  *
- * Date: 2016-12-09
+ * Date: 2017-01-23
  */
 (function($) {
   var maskAsNumberMaxlengthDataKey = 'maskAsNumberMaxlength',
