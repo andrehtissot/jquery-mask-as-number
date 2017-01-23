@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Mask As Number Example</title>
     <style>
-        fieldset { max-width: 400px; }
+        fieldset { max-width: 460px; }
         input,select { float: right; width: 160px; }
         label { line-height: 30px; display: block; }
     </style>
@@ -82,7 +82,7 @@
             <legend>Masked field with max value 512</legend>
             <label>Example:
                 <input type="number" class="maskedTextField" value="Initial text 123456789"
-                    data-mask-as-number-max="512" />
+                    max="512" />
             </label>
         </fieldset>
         <br />
@@ -90,7 +90,7 @@
             <legend>Masked field with min value 2</legend>
             <label>Example:
                 <input type="number" class="maskedTextField" value="Initial text 123456789"
-                    data-mask-as-number-min="2" />
+                    min="2" />
             </label>
         </fieldset>
         <br />
