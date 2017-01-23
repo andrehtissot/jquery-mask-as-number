@@ -11,9 +11,8 @@
  * Date: 2017-01-23
  */
 (function($) {
-  var maskAsNumberMaxlengthDataKey = 'maskAsNumberMaxlength',
-    maskAsNumberMaxDataKey = 'maskAsNumberMax',
-    maskAsNumberMinDataKey = 'maskAsNumberMin',
+  var maxlengthDataKey = 'maskAsNumberMaxlength', maxDataKey = 'maskAsNumberMax',
+    minDataKey = 'maskAsNumberMin',
     compareIntegerStrings = function(integerStringA, integerStringB){
     if(integerStringA[0] === '-' && integerStringB[0] === '-'){
       if(integerStringA.length > integerStringB.length) { return 1; }
@@ -59,17 +58,17 @@
     var receivedMinus = false;
     $(this).each(function(idx,element){
       var $elem = $(element), value = getFieldValue(element),
-        max = (options.max || $elem.data(maskAsNumberMaxDataKey) || $elem.attr('max') || null),
-        min = (options.min || $elem.data(maskAsNumberMinDataKey) || $elem.attr('min') || null),
-        maxlength = $elem.attr('maxlength') || $elem.data(maskAsNumberMaxlengthDataKey) || null;
+        max = ''+(options.max || $elem.data(maxDataKey) || $elem.attr('max') || ''),
+        min = ''+(options.min || $elem.data(minDataKey) || $elem.attr('min') || ''),
+        maxlength = ''+($elem.attr('maxlength') || $elem.data(maxlengthDataKey) || '');
       if(element.type === 'number'){
-        if(max !== null) { $elem.attr('max', max); }
-        if(min !== null) { $elem.attr('min', min); }
-        if(maxlength !== null) { $elem.data(maskAsNumberMaxlengthDataKey, maxlength); }
+        if(max !== '') { $elem.attr('max', max); }
+        if(min !== '') { $elem.attr('min', min); }
+        if(maxlength !== '') { $elem.data(maxlengthDataKey, maxlength); }
       }
-      if (max !== null && maxlength === null && ((min !== null && min >= 0))){
+      if (max !== '' && maxlength === '' && ((min !== '' && min[0] !== '-'))){
         if(element.type === 'text') { $elem.attr('maxlength', (''+max).length); }
-        else { $elem.data(maskAsNumberMaxlengthDataKey, (''+max).length); }
+        else { $elem.data(maxlengthDataKey, (''+max).length); }
       }
       if(value !== '-' && !(/\d/.test(value))){ $elem.val(''); return; }
       var fixedValue = fixValue(value, min, max, maxlength);
@@ -77,7 +76,9 @@
     }).on('keypress.maskAsNumber', function(event){
       if (event.ctrlKey || event.keyCode === 13
         || event.keyCode === 9 || event.charCode === 0) { return; }
-      var char = event.char || String.fromCharCode(event.charCode);
+      var char = event.char || String.fromCharCode(event.charCode), $this = $(this),
+        min = ''+(options.min || $this.data(minDataKey) || $this.attr('min') || '');
+      if (min !== '' && min[0] !== '-' && char === '-') { event.preventDefault(); return; }
       if (char !== '-' && /\D/.test(char)) { event.preventDefault(); return; }
       receivedMinus = char === '-';
     }).on('keyup.maskAsNumber', function(event){
@@ -85,16 +86,17 @@
       var $this = $(this), value = getFieldValue(this);
       if(value === '' || value === '0') { return; }
       var fixedValue = fixValue(value, null,
-        ($this.data(maskAsNumberMaxDataKey) || $this.attr('max') || null),
-        $this.data(maskAsNumberMaxlengthDataKey) || null);
+        ''+(options.max || $this.data(maxDataKey) || $this.attr('max') || ''),
+        $this.data(maxlengthDataKey) || null);
       if (fixedValue !== false) { $this.val(''+fixedValue); }
     }).on('focusout.maskAsNumber', function(event){
       var $this = $(this), value = getFieldValue(this);
       if(value === '') { return; }
       if(value === '-') { $this.val(''); }
-      var fixedValue = fixValue(value, ($this.data(maskAsNumberMinDataKey) || $this.attr('min') || null),
-        ($this.data(maskAsNumberMaxDataKey) || $this.attr('max') || null),
-        $this.data(maskAsNumberMaxlengthDataKey) || null);
+      var fixedValue = fixValue(value,
+        ''+(options.min || $this.data(minDataKey) || $this.attr('min') || ''),
+        ''+(options.max || $this.data(maxDataKey) || $this.attr('max') || ''),
+        $this.data(maxlengthDataKey) || null);
       if(fixedValue === '0') { return; }
       if(fixedValue !== false) { $this.val(fixedValue); }
     }).on('paste.maskAsNumber', function(e){
@@ -108,12 +110,12 @@
       var minus = pastedString[0] === '-' ? '-' : '';
       pastedString = minus+pastedString.replace(/\D/g,'');
       var $this = $(this), isATextField = (this.type === 'text'),
-        maxlength = $this.data(maskAsNumberMaxlengthDataKey) || $this.attr('maxlength') || null;
+        maxlength = $this.data(maxlengthDataKey) || $this.attr('maxlength') || null;
       if(isATextField) { $this.removeAttr('maxlength'); }
-      else { $this.removeData(maskAsNumberMaxlengthDataKey); }
+      else { $this.removeData(maxlengthDataKey); }
       setTimeout(function($elem, maxlength){
         if(isATextField) { $elem.attr('maxlength', maxlength); }
-        else { $elem.data(maskAsNumberMaxlengthDataKey, maxlength); }
+        else { $elem.data(maxlengthDataKey, maxlength); }
         var value = getFieldValue($elem[0]);
         if(value.length > maxlength)
           $elem.val(value.substr(0, maxlength));
