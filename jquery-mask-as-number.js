@@ -12,7 +12,7 @@
  */
 (function($) {
   var maxlengthDataKey = 'maskAsNumberMaxlength', maxDataKey = 'maskAsNumberMax',
-    minDataKey = 'maskAsNumberMin',
+    minDataKey = 'maskAsNumberMin', stepDataKey = 'maskAsNumberStep',
     compareIntegerStrings = function(integerStringA, integerStringB){
     if(integerStringA[0] === '-' && integerStringB[0] === '-'){
       if(integerStringA.length > integerStringB.length) { return 1; }
@@ -57,10 +57,12 @@
     var options = options || {};
     var receivedMinus = false;
     $(this).each(function(idx,element){
-      var $elem = $(element), value = getFieldValue(element),
+      var $elem = $(element), value = getFieldValue(element), maxlength =
+        ''+(options.maxlength || $elem.data(maxlengthDataKey) || $elem.attr('maxlength')|| ''),
         max = ''+(options.max || $elem.data(maxDataKey) || $elem.attr('max') || ''),
         min = ''+(options.min || $elem.data(minDataKey) || $elem.attr('min') || ''),
-        maxlength = ''+($elem.attr('maxlength') || $elem.data(maxlengthDataKey) || '');
+        step = ''+(options.step || $elem.data(stepDataKey) || $elem.attr('step')|| '');
+      step = $.isNumeric(step) ? parseFloat(step) : 1;
       if(element.type === 'number'){
         if(max !== '') { $elem.attr('max', max); }
         if(min !== '') { $elem.attr('min', min); }
