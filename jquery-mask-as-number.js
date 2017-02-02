@@ -72,16 +72,15 @@
     else if(max && compareAsString(value, max) === -1) { value = max; }
     if(maxlength && value.length > maxlength) { value = value.substr(0, maxlength); }
     return (value) === originalValue ? false : value;
-  }, getFieldValue = function(inputElement){
-    if(inputElement.type === 'number'){
-      inputElement.type = 'text';
-      let value = ''+inputElement.value.trim();
-      inputElement.type = 'number';
-      return value;
+  }, getFieldValue = function($inputElement){
+    if($inputElement[0].type === 'number'){
+      let clone = $inputElement.clone()[0];
+      clone.type = 'text';
+      return ''+clone.value.trim();
     }
-    return inputElement.value.trim();
+    return $inputElement.val().trim();
   }, fixMaxlengthOnPaste = function($elem, maxlength){
-    let value = getFieldValue($elem[0]);
+    let value = getFieldValue($elem);
     if(value.length > maxlength) { $elem.val(value.substr(0, maxlength)); }
     if($elem[0].type === 'text') { $elem.attr('maxlength', maxlength); }
     $elem.data(dataKey).maxlength = maxlength;
@@ -89,7 +88,7 @@
   $.fn.maskAsNumber = function(options){
     var options = options || {};
     $(this).each(function(idx, element){
-      let data = {}, $elem = $(element), value = getFieldValue(element);
+      let data = {}, $elem = $(element), value = getFieldValue($elem);
       data.maxlength = (options.maxlength || $elem.data(dataKey+'Maxlength')
         || $elem.attr('maxlength') || null);
       data.max = ''+(options.max || $elem.data(dataKey+'Max') || $elem.attr('max') || '');
@@ -145,14 +144,14 @@
     }).on('keyup.'+dataKey, function(event){
       let $this = $(this), data = $this.data(dataKey);
       if(data.receivedMinus || data.receivedDot){ return; }
-      let value = getFieldValue(this);
+      let value = getFieldValue($this);
       if(value === '' || value === '0') { return; }
       let fixedValue = fixValue(value, null, data.max, data.maxlength, data.decimals);
       if (fixedValue !== false) { $this.val(fixedValue); }
     }).on('focusout.'+dataKey, function(event){
-      let value = getFieldValue(this);
+      let $this = $(this), value = getFieldValue($this);
       if(value === '') { return; }
-      let $this = $(this), data = $this.data(dataKey);
+      let data = $this.data(dataKey);
       if(value === '-') { $this.val(''); }
       let fixedValue = fixValue(value, data.min, data.max, data.maxlength, data.decimals);
       if(fixedValue !== '0' && fixedValue !== false) { $this.val(fixedValue); }
