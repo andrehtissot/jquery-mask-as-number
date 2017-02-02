@@ -120,10 +120,10 @@
       }
       if(data.maxlength !== null && element.type === 'text')
         $elem.attr('maxlength', data.maxlength);
+      $elem.data(dataKey, data);
       if(value !== '-' && !(/\d/.test(value))){ $elem.val(''); return; }
       let fixedValue = fixValue(value, data.min, data.max, data.maxlength, data.decimals);
       if(fixedValue !== false) { $elem.val(fixedValue); }
-      $elem.data(dataKey, data);
     }).on('keypress.'+dataKey, function(event){
       if(event.ctrlKey || event.keyCode===13 || event.keyCode===9 || event.charCode===0) { return; }
       let char = event.char || String.fromCharCode(event.charCode), $this = $(this),
