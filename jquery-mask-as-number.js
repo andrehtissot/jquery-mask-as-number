@@ -1,5 +1,5 @@
 /*!
- * MaskAsNumber Jquery Plugin v1.4
+ * MaskAsNumber Jquery Plugin v1.4.1
  * https://github.com/andrehtissot/jquery-mask-as-number
  *
  * Requires jQuery Library
@@ -8,7 +8,7 @@
  * Copyright André Augusto Tissot
  * Released under the MIT license
  *
- * Date: 2017-01-29
+ * Date: 2017-02-02
  */
 "use strict";
 (function($) {
