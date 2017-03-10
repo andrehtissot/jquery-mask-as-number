@@ -1,5 +1,5 @@
 /*!
- * MaskAsNumber Jquery Plugin v1.4.1
+ * MaskAsNumber Jquery Plugin v1.5.0
  * https://github.com/andrehtissot/jquery-mask-as-number
  *
  * Requires jQuery Library
@@ -8,7 +8,7 @@
  * Copyright André Augusto Tissot
  * Released under the MIT license
  *
- * Date: 2017-02-02
+ * Date: 2017-03-10
  */
 "use strict";
 (function($) {
@@ -79,6 +79,8 @@
       return ''+clone.value.trim();
     }
     return $inputElement.val().trim();
+  }, getInitialFieldValue = function($inputElement){
+    return ''+($inputElement[0].value || $inputElement[0].defaultValue).trim();
   }, fixMaxlengthOnPaste = function($elem, maxlength){
     let value = getFieldValue($elem);
     if(value.length > maxlength) { $elem.val(value.substr(0, maxlength)); }
@@ -87,8 +89,8 @@
   };
   $.fn.maskAsNumber = function(options){
     var options = options || {};
-    $(this).each(function(idx, element){
-      let data = {}, $elem = $(element), value = getFieldValue($elem);
+    this.each(function(idx, element){
+      let data = {}, $elem = $(element), value = getInitialFieldValue($elem);
       data.maxlength = (options.maxlength || $elem.data(dataKey+'Maxlength')
         || $elem.attr('maxlength') || null);
       data.max = ''+(options.max || $elem.data(dataKey+'Max') || $elem.attr('max') || '');
@@ -172,5 +174,6 @@
         setTimeout(fixMaxlengthOnPaste, 100, $this, maxlength);
       }
     });
+    return this;
   };
 })(jQuery);
