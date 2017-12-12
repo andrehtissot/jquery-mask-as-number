@@ -6,10 +6,10 @@ Demo: https://jsfiddle.net/andretissot/9prtpcd5/
 HTML5 number field only highlites invalid entry, but doesn't enforce the valid:
 
 - On Chrome 55:<br />
-![alt tag](https://raw.githubusercontent.com/andrehtissot/jquery-mask-as-number/master/.docs/number_input_on_chrome.png)
+![Inserting invalid numbers in chrome number fields](https://user-images.githubusercontent.com/1174345/33887303-a3d8fa4e-df49-11e7-92c7-88a2268b52f9.png)
 
 - On Firefox 50:<br />
-![alt tag](https://raw.githubusercontent.com/andrehtissot/jquery-mask-as-number/master/.docs/number_input_on_firefox.png)
+![Inserting invalid numbers in firefox number fields](https://user-images.githubusercontent.com/1174345/33887300-a01ead9a-df49-11e7-996a-c96d92b50342.png)
 
 This jquery extension forces the input to only allow integer values, and minus if first character.
 
