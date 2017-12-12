@@ -1,0 +1,30 @@
+{
+  "name": "jquery-mask-as-number",
+  "version": "1.5.0",
+  "description": "Simple mask function that ensures valid integer numbers in text inputs.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrehtissot/jquery-mask-as-number"
+  },
+  "keywords": [
+    "jquery",
+    "plugin"
+    "input",
+    "mask",
+    "number",
+    "integer",
+    "ecosystem:web",
+    "javascript"
+  ],
+  "platforms": [
+    "web"
+  ],
+  "engines": [],
+  "dependencies": {},
+  "author": "André Augusto Tissot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrehtissot/jquery-mask-as-number/issues"
+  },
+  "homepage": "https://github.com/andrehtissot/jquery-mask-as-number/blob/master/README.md"
+}
