@@ -1,4 +1,8 @@
 # jquery-mask-as-number
+[![npm](https://img.shields.io/npm/dt/jquery-mask-as-number.svg)](https://www.npmjs.com/package/jquery-mask-as-number)
+[![npm](https://img.shields.io/npm/v/jquery-mask-as-number.svg)](https://www.npmjs.com/package/jquery-mask-as-number)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Simple mask jquery extension that ensures valid integer numbers in text inputs
 
 Demo: https://jsfiddle.net/andretissot/9prtpcd5/
