@@ -2,6 +2,7 @@
 [![npm](https://img.shields.io/npm/dt/jquery-mask-as-number.svg)](https://www.npmjs.com/package/jquery-mask-as-number)
 [![npm](https://img.shields.io/npm/v/jquery-mask-as-number.svg)](https://www.npmjs.com/package/jquery-mask-as-number)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Known Vulnerabilities](https://snyk.io/test/github/andrehtissot/jquery-mask-as-number/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andrehtissot/jquery-mask-as-number?targetFile=package.json)
 
 Simple mask jquery extension that ensures valid integer numbers in text inputs
 
